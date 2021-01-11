@@ -19,5 +19,5 @@ jobs:
         chmod +x ./gradlew
         ./gradlew -p . check
         ls
-        cd build/outputs/apk/
+        cd build
         ls

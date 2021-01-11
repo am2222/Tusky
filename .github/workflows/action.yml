@@ -17,6 +17,6 @@ jobs:
         ls 
         export GRADLE_USER_HOME=`pwd`.gradle
         chmod +x ./gradlew
-        ./gradlew 
+        ./gradlew -p  check
         cd build
         ls

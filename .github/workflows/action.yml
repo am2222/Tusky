@@ -18,6 +18,5 @@ jobs:
         export GRADLE_USER_HOME=`pwd`.gradle
         chmod +x ./gradlew
         ./gradlew -p . check
-        ls
         cd build
         ls

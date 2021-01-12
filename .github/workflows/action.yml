@@ -13,11 +13,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: restore release keystore
-      run: |
-          echo "${{ secrets.RELEASE_TOKEN }}" > release.keystore.asc
-          gpg -d --passpharase "${{  secrets.RELESE_PASSCODE }}" --batch release.keystore.asc > release.keystore
-          ls
     - name: build
       run: |
         npm install
@@ -27,4 +22,10 @@ jobs:
         ./gradlew build
         ./gradlew assembleRelease
         ./upload-to-release app/build/outputs/apk/blue/release/app-blue-release-unsigned.apk
+          - name: restore release keystore
+    - name: restore release keystore
+      run: |
+          echo "${{ secrets.RELEASE_TOKEN }}" > release.keystore.asc
+          gpg -d --passphrase "${{  secrets.RELESE_PASSCODE }}" --batch release.keystore.asc > release.keystore
+          ls
     

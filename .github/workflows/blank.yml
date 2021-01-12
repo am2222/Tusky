@@ -9,14 +9,14 @@ env:
 jobs:
   android-ci:
     runs-on: ubuntu-latest
-
     steps:
-    - name: build
-      run: |
-        ./upload-to-release gradlew.bat
-    - name: restore release keystore
-      run: |
-          echo "${{ secrets.RELEASE_TOKEN }}" > release.keystore.asc
-          gpg -d --passphrase "${{  secrets.RELESE_PASSCODE }}" --batch release.keystore.asc > release.keystore
-          ls
-    
+      - uses: actions/checkout@v1
+      - name: build
+        run: |
+          ./upload-to-release gradlew.bat
+      - name: restore release keystore
+        run: |
+            echo "${{ secrets.RELEASE_TOKEN }}" > release.keystore.asc
+            gpg -d --passphrase "${{  secrets.RELESE_PASSCODE }}" --batch release.keystore.asc > release.keystore
+            ls
+

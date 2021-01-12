@@ -1,6 +1,6 @@
 name: Android CI
 
-on: [push]
+on: [release]
 
 jobs:
 
@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: test
+    - name: build
       run: |
         npm install
         ls 
@@ -19,5 +19,11 @@ jobs:
         chmod +x ./gradlew
         ./gradlew build
         ./gradlew assembleRelease
-        cd app
+        cd app/build/outputs/apk/blue/release
         find . -print
+    - name: Upload to release
+      uses: JasonEtco/upload-to-release@master
+      with:
+          args: app/build/outputs/apk/blue/release/app-blue-release-unsigned.apk
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

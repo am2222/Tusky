@@ -22,7 +22,6 @@ jobs:
         ./gradlew build
         ./gradlew assembleRelease
         ./upload-to-release app/build/outputs/apk/blue/release/app-blue-release-unsigned.apk
-          - name: restore release keystore
     - name: restore release keystore
       run: |
           echo "${{ secrets.RELEASE_TOKEN }}" > release.keystore.asc

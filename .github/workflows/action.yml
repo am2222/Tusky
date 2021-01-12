@@ -21,7 +21,5 @@ jobs:
         chmod +x ./gradlew
         ./gradlew build
         ./gradlew assembleRelease
-        cd app/build/outputs/apk/blue/release
-        find . -print
         ./upload-to-release app/build/outputs/apk/blue/release/app-blue-release-unsigned.apk
 

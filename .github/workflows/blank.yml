@@ -9,7 +9,6 @@ env:
 jobs:
   android-ci:
     runs-on: ubuntu-latest
-    container: code0987/android-ci:latest
 
     steps:
     - name: build

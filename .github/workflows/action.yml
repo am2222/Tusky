@@ -18,5 +18,6 @@ jobs:
         export GRADLE_USER_HOME=`pwd`.gradle
         chmod +x ./gradlew
         ./gradlew build
+        ./gradlew assembleRelease
         cd app
         find . -print

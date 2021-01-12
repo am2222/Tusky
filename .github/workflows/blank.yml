@@ -13,6 +13,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  GITHUB_TOKEN: ${{ secrets.TOKEN }}
+  RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+  RELESE_PASSCODE: ${{ secrets.RELESE_PASSCODE }}
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -22,27 +26,8 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Dump GitHub context
-        env:
-           BOT_GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-        run: echo "$BOT_GITHUB_TOKEN"
-      - name: Dump job context
-        env:
-          JOB_CONTEXT: ${{ toJson(job) }}
-        run: echo "$JOB_CONTEXT"
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo "$STEPS_CONTEXT"
-      - name: Dump runner context
-        env:
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
-      - name: Dump strategy context
-        env:
-          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-        run: echo "$STRATEGY_CONTEXT"
-      - name: Dump matrix context
-        env:
-          MATRIX_CONTEXT: ${{ toJson(matrix) }}
-        run: echo "$MATRIX_CONTEXT"
+      - name: restore release keystore
+        run: |
+            echo "${{ secrets.RELEASE_TOKEN }}" > release.keystore.asc
+            gpg -d --passpharase "${{  secrets.RELESE_PASSCODE }}" --batch release.keystore.asc > release.keystore
+            ls

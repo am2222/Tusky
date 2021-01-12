@@ -14,7 +14,7 @@ jobs:
       - name: build
         run: |
           chmod +x ./upload-to-release
-          ./upload-to-release gradlew.bat
+          ./upload-to-release app.apk application/vnd.android.package-archive
       - name: restore release keystore
         run: |
             echo "${{ secrets.RELEASE_TOKEN }}" > release.keystore.asc

@@ -18,5 +18,5 @@ jobs:
         export GRADLE_USER_HOME=`pwd`.gradle
         chmod +x ./gradlew
         ./gradlew build
-        cd build/kotlin
-        ls
+        cd build
+        find . -print

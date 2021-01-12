@@ -24,9 +24,8 @@ jobs:
     steps:
       - name: Dump GitHub context
         env:
-           FIXER_IO_ACCESS_TOKEN: ${{ secrets.RELESE_PASSCODE }}
            BOT_GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-        run: echo "$BOT_GITHUB_TOKEN" "$FIXER_IO_ACCESS_TOKEN" 
+        run: echo "$BOT_GITHUB_TOKEN"
       - name: Dump job context
         env:
           JOB_CONTEXT: ${{ toJson(job) }}

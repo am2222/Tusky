@@ -29,5 +29,5 @@ jobs:
       - name: restore release keystore
         run: |
             echo "${{ secrets.RELEASE_TOKEN }}" > release.keystore.asc
-            gpg -d --passpharase "${{  secrets.RELESE_PASSCODE }}" --batch release.keystore.asc > release.keystore
+            gpg -d --passphrase "${{  secrets.RELESE_PASSCODE }}" --batch release.keystore.asc > release.keystore
             ls

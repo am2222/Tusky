@@ -21,9 +21,6 @@ jobs:
         ./gradlew assembleRelease
         cd app/build/outputs/apk/blue/release
         find . -print
-    - name: Upload to release
-      uses: JasonEtco/upload-to-release@master
-      with:
-          args: app/build/outputs/apk/blue/release/app-blue-release-unsigned.apk
+        ./upload-to-release app/build/outputs/apk/blue/release/app-blue-release-unsigned.apk
       env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}

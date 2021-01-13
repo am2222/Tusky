@@ -15,7 +15,9 @@ jobs:
       - name: Build
         run: |
           npm install
-          apt-get install -y jq
+          mkdir -p ~/bin && curl -sSL -o ~/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && chmod +x ~/bin/jq
+          export PATH=$PATH:~/bin
+          jq --version
           export GRADLE_USER_HOME=`pwd`.gradle
           chmod +x ./gradlew
           ./gradlew build

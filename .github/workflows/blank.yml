@@ -15,11 +15,8 @@ jobs:
       - name: Build
         run: |
           npm install
-          apt-get install software-properties-common
           apt-get update
-          add-apt-repository ppa:eugenesan/ppa
-          apt-get update
-          apt-get install jq -y
+          apt-get install -t wheezy-backports jq
           jq --version
           export GRADLE_USER_HOME=`pwd`.gradle
           chmod +x ./gradlew

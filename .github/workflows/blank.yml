@@ -15,6 +15,7 @@ jobs:
       - name: Build
         run: |
           npm install
+          add-apt-repository universe
           apt-get update
           apt-get install -t wheezy-backports jq
           jq --version

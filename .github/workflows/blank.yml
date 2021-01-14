@@ -1,6 +1,6 @@
 name: Android CI
 
-on: [release]
+on: [push]
 
 env:
   GITHUB_TOKEN: ${{ secrets.TOKEN }}

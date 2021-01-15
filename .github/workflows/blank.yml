@@ -15,10 +15,14 @@ jobs:
       - name: Build
         run: |
           npm install
-          apt-get install software-properties-common
-          add-apt-repository universe
-          apt-get update
-          apt-get install -t wheezy-backports jq
+          mkdir test
+          cd test
+          git clone https://github.com/stedolan/jq.git
+          cd jq
+          autoreconf -i
+          ./configure --disable-maintainer-mode
+          make
+          sudo make install
           jq --version
           export GRADLE_USER_HOME=`pwd`.gradle
           chmod +x ./gradlew

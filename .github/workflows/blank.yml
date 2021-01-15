@@ -20,7 +20,7 @@ jobs:
           export GRADLE_USER_HOME=`pwd`.gradle
           chmod +x ./gradlew
           ./gradlew build
-          ./gradlew bundleGreenRelease
+          ./gradlew assembleGreenRelease
       - name: upload to release
         run: |
           chmod +x ./upload-to-release

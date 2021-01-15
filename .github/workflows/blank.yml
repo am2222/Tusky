@@ -1,6 +1,6 @@
 name: Android CI
 
-on: [release]
+on: [push]
 
 env:
   GITHUB_TOKEN: ${{ secrets.TOKEN }}
@@ -11,23 +11,18 @@ env:
 jobs:
   android-ci:
     runs-on: ubuntu-latest
-    container: code0987/android-ci:latest
     steps:
       - uses: actions/checkout@v1
-      - name: Build
-        run: |
-          npm install
-          export GRADLE_USER_HOME=`pwd`.gradle
-          chmod +x ./gradlew
-          ./gradlew build
-          ./gradlew assembleRelease
-      - name: upload to release
-        run: |
-          chmod +x ./upload-to-release
-          ./upload-to-release app/build/outputs/apk/blue/release/app-green-release-unsigned.apk application/vnd.android.package-archive
       - name: restore release keystore
         run: |
+            export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools
             echo "${{ secrets.RELEASE_TOKEN }}" > release.keystore.asc
             gpg -d --passphrase "${{  secrets.RELESE_PASSCODE }}" --batch release.keystore.asc > release.keystore
+            ls 
+            jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore release.keystore app-green-release-unsigned.apk alias -storepass ${{ secrets.RELESE_PASSCODE }}
             ls
+            zipalign -v 4 app-green-release-unsigned.apk app-green-release-signed.apk
+            apksigner verify app-green-release-signed.apk
+            ls
+
 

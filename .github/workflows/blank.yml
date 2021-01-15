@@ -24,7 +24,7 @@ jobs:
       - name: upload to release
         run: |
           chmod +x ./upload-to-release
-          ./upload-to-release app/build/outputs/apk/blue/release/app-blue-release-unsigned.apk application/vnd.android.package-archive
+          ./upload-to-release app/build/outputs/apk/blue/release/app-green-release-unsigned.apk application/vnd.android.package-archive
       - name: restore release keystore
         run: |
             echo "${{ secrets.RELEASE_TOKEN }}" > release.keystore.asc

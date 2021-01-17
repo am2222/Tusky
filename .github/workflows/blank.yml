@@ -27,6 +27,7 @@ jobs:
          # ./upload-to-release app/build/outputs/apk/green/release/app-green-release-unsigned.apk application/vnd.android.package-archive
       - name: restore release keystore
         run: |
+            apt-get install -y apksigner
             export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools
             echo "${{ secrets.RELEASE_TOKEN }}" > release.keystore.asc
             gpg -d --passphrase "${{ secrets.RELESE_PASSCODE }}" --batch release.keystore.asc > release.keystore

@@ -1,6 +1,6 @@
 name: Android CI
 
-on: [release]
+on: [push]
 
 env:
   GITHUB_TOKEN: ${{ secrets.TOKEN }}
@@ -14,17 +14,17 @@ jobs:
     container: code0987/android-ci:latest
     steps:
       - uses: actions/checkout@v1
-      - name: Build
-        run: |
-          npm install
-          export GRADLE_USER_HOME=`pwd`.gradle
-          chmod +x ./gradlew
-          ./gradlew build
-          ./gradlew assembleGreenRelease
-      - name: upload to release
-        run: |
-          chmod +x ./upload-to-release
-          ./upload-to-release app/build/outputs/apk/green/release/app-green-release-unsigned.apk application/vnd.android.package-archive
+      #- name: Build
+       # run: |
+       #   npm install
+       #   export GRADLE_USER_HOME=`pwd`.gradle
+        #  chmod +x ./gradlew
+         # ./gradlew build
+          #./gradlew assembleGreenRelease
+      #- name: upload to release
+       # run: |
+        #  chmod +x ./upload-to-release
+         # ./upload-to-release app/build/outputs/apk/green/release/app-green-release-unsigned.apk application/vnd.android.package-archive
       - name: restore release keystore
         run: |
             export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools

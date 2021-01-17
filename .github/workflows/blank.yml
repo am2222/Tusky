@@ -32,8 +32,9 @@ jobs:
             gpg -d --passphrase "${{ secrets.RELESE_PASSCODE }}" --batch release.keystore.asc > release.keystore
             ls
             pwd
-            jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore /__w/Tusky/Tusky/release.keystore /__w/Tusky/Tusky/app-green-release-unsigned.apk ${{ secrets.RELEASE_ALIAS }} -storepass ${{ secrets.RELESE_PASSCODE }}
-            ls
-            zipalign -v 4 /__w/Tusky/Tusky/app-green-release-unsigned.apk /__w/Tusky/Tusky/app-green-release-signed.apk
+            #jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore /__w/Tusky/Tusky/release.keystore /__w/Tusky/Tusky/app-green-release-unsigned.apk ${{ secrets.RELEASE_ALIAS }} -storepass ${{ secrets.RELESE_PASSCODE }}
+            apksigner sign --ks release.keystore --ks-key-alias ${{ secrets.RELEASE_ALIAS }} --ks-pass ${{ secrets.RELESE_PASSCODE }} --key-pass ${{ secrets.RELESE_PASSCODE }} --in app-green-release-unsigned.apk --out app-green-release-signed.apk
+            #ls
+            #zipalign -v 4 /__w/Tusky/Tusky/app-green-release-unsigned.apk /__w/Tusky/Tusky/app-green-release-signed.apk
             apksigner verify /__w/Tusky/Tusky/app-green-release-signed.apk
             ls

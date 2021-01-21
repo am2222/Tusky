@@ -38,5 +38,5 @@ jobs:
             apksigner sign --ks release.keystore --ks-key-alias ${{ secrets.RELEASE_ALIAS }} --ks-pass ${{ secrets.RELESE_PASSCODE }} --key-pass ${{ secrets.RELESE_PASSCODE }} --in app-green-release-unsigned.apk --out app-green-release-signed.apk
             #ls
             #zipalign -v 4 /__w/Tusky/Tusky/app-green-release-unsigned.apk /__w/Tusky/Tusky/app-green-release-signed.apk
-            apksigner verify /__w/Tusky/Tusky/app-green-release-signed.apk
+            $ANDROID_HOME/build-tools/29.0.2/apksigner verify /__w/Tusky/Tusky/app-green-release-signed.apk
             ls
